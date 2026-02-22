@@ -169,6 +169,39 @@ p {
     color: var(--white);
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.menu-toggle span {
+    width: 100%;
+    height: 2px;
+    background-color: var(--white);
+    transition: var(--trans-fast);
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
 /* Hero Refactor */
 .hero {
     min-height: 100vh;
@@ -344,6 +377,49 @@ p {
     transition-delay: 0.45s;
 }
 
+/* Mobile Menu Overlay */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--navy-950);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%);
+    transition: var(--trans-reveal);
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+.mobile-nav-links {
+    list-style: none;
+    text-align: center;
+}
+
+.mobile-nav-links li {
+    margin-bottom: 2rem;
+}
+
+.mobile-nav-links a {
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: var(--trans-fast);
+}
+
+.mobile-nav-links a:hover {
+    color: var(--accent);
+}
+
 /* Responsive Adjustments */
 @media (max-width: 1024px) {
     .bento-layout {
@@ -377,7 +453,44 @@ p {
         display: none;
     }
 
-    .section-gap {
-        var(--section-gap): 8rem;
+    :root {
+        --section-gap: 8rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .nav-links,
+    .nav-cta {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .navbar {
+        padding: 0.75rem 1.25rem;
+        /* More compact on mobile */
+    }
+
+    .hero {
+        padding-top: calc(var(--nav-height) + 4rem);
+        /* More appropriate for small screens */
+    }
+
+    .bento-layout {
+        grid-template-columns: 1fr;
+        /* Force 1 column on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.25rem;
+    }
+
+    .container {
+        padding: 0 1rem;
     }
 }
